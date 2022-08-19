@@ -1,57 +1,54 @@
+Author ritu
+/*
+ Create a method named countVowels that take a String as input and convert it into  an array of
+characters  and returns the number of vowels in the array.
+Furthermore, the method should throw a checked exception if the
+array contains the letter 'x'.
+ */
 import java.util.Scanner;
-
-public class ExceptionArray
-
-{
-	void countVowels(String str) {
-		int strLength= str.length();
-		//Creating array of string length
-		char []arr= new char[strLength];
-		int i;
-		//Copying string character into array 
-		for(i=0;i<strLength;i++) {
-			arr[i]=str.charAt(i);
-
-		}
-		//Showing characters in array format
-		System.out.print("The array is: ");
-		for(i=0;i<strLength;i++) {
-			System.out.print(" "+ arr[i]+" ");
-		}
-		System.out.println(" ");
-
-		//Print vowels	
-		int count=0;
-		System.out.print("The vowels: ");
-		for(i=0;i<strLength;i++) {
-			if(arr[i]=='a'
-					||arr[i]=='e'
-					||arr[i]=='i'
-					||arr[i]=='o'
-					||arr[i]=='u')
-			{
-				System.out.print(" "+arr[i]+" ");
-				count+=1;
-
+ class Chavow {
+//	creating method for accepting a String and return total number of vowel belongs to that String
+	int countVowels(String str) {
+//		set c=0 for counting number of vowels it will increase by 1 when any vowel char is found
+		int c=0; 
+//		converting string to uppercase
+		str=str.toUpperCase();
+//		Storing String in Char array
+		char newCharArray[] = str.toCharArray();
+//		start loop for checking every index char is it vowel or not
+		for(int i=0;i<newCharArray.length;i++)
+		{
+//			comparing every index value one by one if char is vowel counter will increment by 1 every time
+			if( (newCharArray[i]=='A') || (newCharArray[i]=='E') || (newCharArray[i]=='I') || (newCharArray[i]=='O') ||  (newCharArray[i]=='U')   )
+				c++;
+//			if any index value is matched to x than Exception will be throw 
+			if(newCharArray[i]=='X') {
+				try {
+					throw new Exception();
+				}
+				catch(Exception e) {
+					System.out.println("letter x contains Exception");
+				}
 			}
-
 		}
-		System.out.println(" ");
-		System.out.println("The number of vowels: "+ count);
-
-
-
-
+//		return total number of vowel 
+		return c;
 	}
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
+//		creating instance of class CVowels for calling its methods 
+		CVowels cv = new CVowels();
 
-		System.out.println("Enter any string: ");
-		Scanner sc= new Scanner(System.in);
-		String str= sc.next();
+//		creating instance of class Scanner for accept values from user
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter a Sring : ");
+		String str=s.next();
 
-		ExceptionArrayCount obj= new ExceptionArrayCount();
-		obj.countVowels(str);
+//		calling countVowels method with the help of cv instance(object)
+		int result = cv.countVowels(str);
+//		printing the result of method
+		System.out.println("Total Number of Vowels presents : "+result);
 
+		s.close();
 	}
- }
+}
