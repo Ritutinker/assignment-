@@ -1,40 +1,52 @@
 import java.util.Scanner;
-import java.lang.Exception;
 
-public class ExceptionThrow {
+public class ExceptionText {
+	//	creating a method which accept two values
+	void divException(String n1,String n2)
+	{	
+//		this variable is makes for storing average of both values 
+		int r; 
 
+		try {
+//		converting String values into integer for arithmetic calculation 
+			r = Integer.parseInt(n1)/Integer.parseInt(n2);
+//		if there is no any Exception occur it will print average of two number perfectly
+			System.out.println("Average is : "+r);
+		}
+//		Exception occur when number is divided by 0
+		catch(ArithmeticException e)		{
+			System.out.println("Invalid division");
+		}
+//		this Exception occur when user gives any text instead of numbers
+		catch(NumberFormatException  e) {
+			System.out.println("Format mismatch");
+		}
+//		if any other exception is occur 
+		catch(Exception e)
+		{
+			System.out.println("Exception encountered");	
+		}
+//		this block executed once whenever any exception occur or not
+		finally{
+			System.out.println("Exception Handling Completed");
+		}
+	}
 	public static void main(String[] args) {
-		Scanner sc=new Scanner(System.in);
-		System.out.println("enter the two no");
-		String str1=sc.nextLine();
-		String str2=sc.nextLine();
-		 try
-		 {
-				int a=Integer.parseInt(str1);
-				int b=Integer.parseInt(str2);
-				int c=a/b;
-				System.out.println("value of divide by a&b:"+c);
+//		creating instance of class Scanner for accept values from user
+		Scanner sc =new Scanner(System.in);
 
-			}
-				catch(NumberFormatException ex)
-				{
-					System.out.println("format mismatch ");
-				}
-				catch(Exception e)
-				{
-					System.out.println("divide by zero is invalid division"+e);
-				}
+//		Accepting two values from user
+		System.out.println("enter two values : ");
+		String n1=sc.next();
+		String	n2=sc.next();
 
-				finally
-				{
-					System.out.println("Exception encountered");
-				}
-				System.out.println("Exception Handling Completed");
+//		creating instance of class SumOfArray for calling its methods 
+		ExceptionTest obj = new ExceptionTest();
+//		calling divException method with the help of obj instance(object)
+		obj.divException(n1,n2);
 
-
-
-
-
+//		closing Scanner for better resource management 
+		sc.close();
 	}
 
 }
