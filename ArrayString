@@ -1,0 +1,32 @@
+//Write a method that takes a String and returns a String of the
+same length containing the 'X' character in all positions except the
+ last 4 positions. The characters in the last 4 positions must be the
+same as in the original string. For example, if the argument is
+"12345678", the return value should be "XXXX5678".
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+import java.util.Scanner;
+
+public class StringClass {
+
+    public static void main(String[] args) throws Exception {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the string ");
+        String inputString = sc.nextLine();
+
+        if (inputString.length() > 4) {
+            String allExceptLast4 = inputString.substring(0, inputString.length()-4);
+            String repeatString = "X".repeat(allExceptLast4.length());
+            repeatString +=  inputString.substring(inputString.length()-4);
+            System.out.println(repeatString);
+        }
+        else {
+            System.out.println("Entered string must be greater than 4.");
+        }
+
+    }
+
+}
