@@ -1,0 +1,29 @@
+
+Write a method th find factorial of a number input by user.
+factorial(int n).call this methos from main() and pass argument n .
+Repeat this untill user enters no.
+
+
+import java.util.Scanner;
+
+public class Factorial{
+public static void main(String[]args){
+Int i="yes";
+Scanner sc=new Scanner(System.in);
+while(c.equals("yes"))
+{
+int i ="yes";
+int i,fact=1;
+int num=5;
+for(i=1;i<num;i++){
+fact=fact*i;
+}
+System.out.println("factorial of"+number+"is:"+fact);
+}
+}
+}
+System.out.println("Do you want to continue(yes/no):");
+c=sc.next().toLowerCase();
+}
+}
+}
