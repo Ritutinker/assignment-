@@ -1,0 +1,54 @@
+
+/*Create a class Calculator with two methods add() and substract() and default and parameterized constructor
+Overload theses methods-- int add(int,int)double add(double,int,int)String add(String,String) int substract(int,int) double substract(double,double*/)
+public class Calculator 
+{
+	public int add(int a,int b)
+	{
+		int c=a+b;
+		System.out.println("Add two numbers : "+c);
+		return c;
+	}
+
+	public double add(double x,int y,int z)
+	{
+		double D=x+y+z;
+		System.out.println("Addition of three numbers : "+D);
+		return D;
+	}
+
+	public String add(String str1,String str2)
+	{
+		String str=str1+str2;
+		System.out.println("Addition of two Strings : "+str);
+		return str;
+	}
+
+	public int substract(int a,int b)
+	{
+		int c=a-b;
+		System.out.println("Subtraction of two numbers : "+c);
+		return c;
+	}
+
+	public double substract(double x,double y)
+	{
+		double z=x-y;
+		System.out.println("Subtraction of two(double data type) numbers : "+z);
+		return z;
+	}
+
+
+
+
+	public static void main(String...args)
+	{
+		Calculator cal=new Calculator();
+		cal.add(20, 10);					//int add(int,int)
+		cal.add(50000, 12, 566);			//double add(double,int,int)
+		cal.add("Ritu", "Tinker");			//String add(String,String)
+		cal.substract(256, 78);				//int substract(int,int)
+		cal.substract(70000000, 6765478); //double substract(double,double)
+
+	}
+}
