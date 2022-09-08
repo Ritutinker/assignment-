@@ -1,0 +1,21 @@
+
+		public class MainStudent extends NewStudent
+		{
+			public static void main(String[] args) 
+			{
+				Student s=new Student();
+				s.setName("Ritu Tinker");
+				s.setAge(20);
+				s.setRollno(919118);
+
+				System.out.println(s.getInstitute());
+				System.out.println("\nName is : "+s.getName());
+				System.out.println("Age is : "+s.getAge());
+				System.out.println("Roll Number is : "+s.getRollno());
+
+			
+		    }
+
+		}
+
+		
