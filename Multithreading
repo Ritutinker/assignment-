@@ -1,0 +1,55 @@
+/*
+ * Author Ritu Tinker
+ *Ques 1  Write a Java program to create multiple thread in Java.
+    (Print even and Odd numbers)Set their name and prorities.
+ */
+
+package MultithreadingProject;
+
+/*public class MyThread {
+
+}*/
+class MyThread1 extends Thread{
+	//override run method
+	public void run()
+	{
+		//print even number
+		int number=20;
+		
+	      for(int i= 1; i<= number; i++)
+	      {
+	         if(i % 2 == 0)
+	         {
+	            System.out.println(Thread.currentThread().getName()+"      "+i);
+	         }
+	      }
+	      //print odd number
+	      for(int i = 1; i <= number; i++)
+	      {
+	         if(i % 2 == 1)
+	         {
+	            System.out.println(Thread.currentThread().getName()+" "+i );
+	         }
+	      }
+	 }
+}
+public class Threads 
+{
+	public static void main(String args[]) 
+	{
+	//creating two objects 
+	 MyThread1 th1=new MyThread1();
+	  MyThread1 th2=new MyThread1();
+	  //set name
+	  th1.setName("Thread 'A'");
+	  th1.setName("Thread  'B'");
+	  //set priority
+	  th1.setPriority(7);
+	  th2.setPriority(10);
+	  //start executing thread
+	  th1.start();
+	  th2.start();
+
+    }
+}
+
