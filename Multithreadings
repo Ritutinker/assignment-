@@ -1,0 +1,108 @@
+/*Author Ritu Tinker;
+ *  Write a JAVA program which will generate two threads:(Use Synchronization)
+
+- To display 10 terms of Fibonacci series.
+- To display 1 to 10 in reverse order.
+ */
+
+package MultithreadingProject;
+
+class Number extends Thread
+{
+	synchronized	 
+	public void fiboSeries()  {
+	    int n = 20 , a = 0, b = 1;
+	    System.out.println("Fibonacci Series till " + n + " terms:");
+
+	    for (int i = 1; i <= n; ++i) {
+	      System.out.println(a + "    ");
+
+	      //  next term
+	      int nextTerm = a + b;
+	      a = b;
+	      a = nextTerm;
+	}
+	}
+	    synchronized	 
+	    public void revNum()
+	    {
+	    	System.out.println("Reverse number series");
+	    	for(int i=20;i>=1;i--)
+	    		System.out.println(i);
+	    }
+}
+class Thread1 extends Thread{
+	Number n;
+	public Thread1(Number n) {
+		this.n=n;
+	}
+	public void run() {
+		n.fiboSeries();
+	}
+
+}
+class Thread2 extends Thread{
+	Number n;
+	public Thread2(Number n) {
+		this.n=n;
+	}
+	public void run() {
+		n.revNum();
+	}
+
+}
+public class FiboRevThread {
+public static void main(String args[]) {
+	Number num1=new Number();
+	Thread1 th1=new Thread1(num1);
+	Thread2 th2=new Thread2(num1);
+	th1.start();
+	th2.start();
+
+}
+}
+
+
+/*output:Fibonacci Series till 20 terms:
+0    
+1    
+2    
+3    
+4    
+5    
+6    
+7    
+8    
+9    
+10    
+11    
+12    
+13    
+14    
+15    
+16    
+17    
+18    
+19    
+Reverse number series
+20
+19
+18
+17
+16
+15
+14
+13
+12
+11
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+*/
