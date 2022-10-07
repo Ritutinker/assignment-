@@ -1,0 +1,28 @@
+/*Student name=Ritu Tinker.
+ * Project name : LabTestOnJunit
+* 2.Write a program for to check a Palindrome string.
+Write test cases for 4 different parameters (use @parametrizedTest Annotation).
+
+ */
+package LabTestJunit;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+//test class
+public class TestPalindrome {
+
+	//in this we are assigning many String values to check whether the string is palindrome or not
+	@DisplayName(value="Reverse String palindrome")
+	@ParameterizedTest
+	@ValueSource
+	(strings  = {"babab","egge","zhaaahz","toot"})
+	
+	public void isPalindromeTest(String str)
+	{
+		assertTrue(Palindrome.isPalindrome(str));
+	}
+}

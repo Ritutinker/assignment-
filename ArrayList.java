@@ -4,22 +4,27 @@
 Write following test cases in a separate java file--
 a.)Test for empty list.
 b.)Test  for size of arrayList.*/
-
 package LabTestJunit;
 
-import java.util.List;
-//main class
-public class ArrayList {
-	//method myArrayListMain()
-	public static ArrayList<Integer> ArrayListMain() {
-		
-		ArrayList<Integer> al=new ArrayList<Integer>();
-		al.add(10);
-		al.add(20);
-		al.add(30);//returning the values of arraylist
-		al.add(40);
-		al.add(50);
-		
-		return al;	
+
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+
+	import org.junit.jupiter.api.Test;
+
+	//test class
+	public class ArrayList {
+		//method-1 to check whether the arraylist is empty or not
+		@Test
+		public void isEmpty()
+		{
+			assertEquals(false,ArrayList.ArrayListMain().isEmpty());
+		}
+		//method-2 to check the size of the 
+		@Test
+		public void sizeArrayListTest()
+		{
+			assertEquals(5,ArrayList.ArrayListMain().size());
+		}
+
 	}
-}
+
