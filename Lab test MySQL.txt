@@ -1,0 +1,217 @@
+1.Create Table
+
+a.Write a SQL statement to create a table named jobs including columns job_id, job_title, min_salary, max_salary and check whether the max_salary amount exceeding the upper limit 25000.
+ Query to create table;
+
+mysql> create table jobs(job_id int, job_title varchar(50), min_salary int, max_salary int,primary key(job_id));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc jobs;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| job_id     | int         | NO   | PRI | NULL    |       |
+| job_title  | varchar(50) | YES  |     | NULL    |       |
+| min_salary | int         | YES  |     | NULL    |       |
+| max_salary | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+
+b. Write a SQL statement to create a table named countries including columns country_id, 
+country_name and region_id and make sure that no countries except Italy, India and China 
+will be entered in the table.
+Query:
+mysql>  create table countries(country_id int ,country_name varchar(50),name enum('Italy','India','China'),region_id varchar(50),primary key(country_id));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc countries;
++--------------+-------------------------------+------+-----+---------+-------+
+| Field        | Type                          | Null | Key | Default | Extra |
++--------------+-------------------------------+------+-----+---------+-------+
+| country_id   | int                           | NO   | PRI | NULL    |       |
+| country_name | varchar(50)                   | YES  |     | NULL    |       |
+| name         | enum('Italy','India','China') | YES  |     | NULL    |       |
+| region_id    | varchar(50)                   | YES  |     | NULL    |       |
++--------------+-------------------------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+
+c.Write a SQL statement to create a table job_history including columns employee_id, start_date, 
+end_date, job_id and department_id and make sure that, the employee_id column does not contain any duplicate value 
+at the time of insertion  .
+Query of the job_history:
+
+mysql> create table job_History(employee_id varchar(10), start_date date, end_date date, job_id varchar(10) , department_id varchar(10),primary key (employee_id));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc job_History;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| employee_id   | varchar(10) | NO   | PRI | NULL    |       |
+| start_date    | date        | YES  |     | NULL    |       |
+| end_date      | date        | YES  |     | NULL    |       |
+| job_id        | varchar(10) | YES  |     | NULL    |       |
+| department_id | varchar(10) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+2.Alter Table
+
+a.Write a SQL statement to add a foreign key constraint named fk_job_id on job_id column of 
+job_history table referencing to the primary key job_id of jobs table.
+Query :
+mysql> alter table jobs add constraint fk_job_id foreign key(job_id) references jobs(job_id);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc jobs;
++---------------+------+------+-----+---------+-------+
+| Field         | Type | Null | Key | Default | Extra |
++---------------+------+------+-----+---------+-------+
+| employee_id   | varchar(10) | NO   | PRI | NULL    |       |
+| start_date    | date | YES  |     | NULL    |       |
+| end_date      | date | YES  |     | NULL    |       |
+| job_id        | int  | YES  | MUL | NULL    |       |
+| department_id | int  | YES  |     | NULL    |       |
++---------------+------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+b.Write a SQL statement to rename the table countries to country_new.
+ 
+Query: to change the table name;
+
+ mysql> alter table countries rename to country_new;
+Query OK, 0 rows affected (0.03 sec)
+
+c.Write a SQL statement to change the name of the column country_id to con_id, 
+keeping the data type and size same.
+
+query: to change the column name;
+
+mysql> alter table country_new rename column country_id to con_id;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc country_new;
++--------------+-------------------------------+------+-----+---------+-------+
+| Field        | Type                          | Null | Key | Default | Extra |
++--------------+-------------------------------+------+-----+---------+-------+
+| con_id       | int                           | NO   | PRI | NULL    |       |
+| country_name | varchar(50)                   | YES  |     | NULL    |       |
+| name         | enum('Italy','India','China') | YES  |     | NULL    |       |
+| region_id    | varchar(50)                   | YES  |     | NULL    |       |
++--------------+-------------------------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+3.DML Statement
+
+a.Write a SQL statement to insert a record with your own value into the table countries against each columns.
+ query to insert;
+mysql> insert into country_new values(1000,'India','India',101);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into country_new values(1001,'Hong kong','Italy',102);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into country_new values(1002,'Switzerland','China',102);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into country_new values(1003,'south korea','China',104);
+Query OK, 1 row affected (0.01 sec)
+ after insert table
+query
+
+mysql> select * from country_new;
++--------+--------------+-------+-----------+
+| con_id | country_name | name  | region_id |
++--------+--------------+-------+-----------+
+|   1000 | India        | India | 101       |
+|   1001 | Hong kong    | Italy | 102       |
+|   1002 | Switzerland  | China | 102       |
+|   1003 | south korea  | China | 104       |
++--------+--------------+-------+-----------+
+4 rows in set (0.00 sec)
+
+
+b.Write a SQL statement to insert 5 rows by a single insert statement into jobs table.
+
+Here is the sample table jobs.
+
+JOB_ID     | JOB_TITLE                       | MIN_SALARY | MAX_SALARY |
++------------+---------------------------------+------------+------------+
+| AD_PRES    | President                       |      20000 |      40000 |
+| AD_VP      | Administration Vice President   |      15000 |      30000 |
+| AD_ASST    | Administration Assistant        |       3000 |       6000 |
+| FI_MGR     | Finance Manager                 |       8200 |      16000 |
+| FI_ACCOUNT | Accountant                      |       4200 |       9000 |
+| AC_MGR     | Accounting Manager              |       8200 |      16000 |
+| AC_ACCOUNT | Public Accountant               |       4200 |       9000 |
+| SA_MAN     | Sales Manager                   |      10000 |      20000 |
+| SA_REP     | Sales Representative            |       6000 |      12000 |
+| PU_MAN     | Purchasing Manager              |       8000 |      15000 |
+| PU_CLERK   | Purchasing Clerk                |       2500 |       5500 |
+| ST_MAN     | Stock Manager                   |       5500 |       8500 |
+| ST_CLERK   | Stock Clerk                     |       2000 |       5000 |
+| SH_CLERK   | Shipping Clerk                  |       2500 |       5500 |
+| IT_PROG    | Programmer                      |       4000 |      10000 |
+| MK_MAN     | Marketing Manager               |       9000 |      15000 |
+| MK_REP     | Marketing Representative        |       4000 |       9000 |
+| HR_REP     | Human Resources Representative  |       4000 |       9000 |
+| PR_REP     | Public Relations Representative |       4500 |      10500 |
++------------+---------------------------------+-- 
+
+query:
+mysql> insert into jobs values(100,' Marketing Representative',25000,35000),(101,' Public Relations Representative',20000,30000),(102,'Human Resources Representative ',45000,65000),(103,'Sales Representative  ',98000,76000),(104,'Administration Vice President ',67000,98000);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from jobs;
++--------+----------------------------------+------------+------------+
+| job_id | job_title                        | min_salary | max_salary |
++--------+----------------------------------+------------+------------+
+|    100 |  Marketing Representative        |      25000 |      35000 |
+|    101 |  Public Relations Representative |      20000 |      30000 |
+|    102 | Human Resources Representative   |      45000 |      65000 |
+|    103 | Sales Representative             |      98000 |      76000 |
+|    104 | Administration Vice President    |      67000 |      98000 |
++--------+----------------------------------+------------+------------+
+5 rows in set (0.00 sec)
+c.Write a SQL statement to change Min_salary  to 8000 and max_Salary to 40000 for programmer.
+query
+before query table
++--------+----------------------------------+------------+------------+
+| job_id | job_title                        | min_salary | max_salary |
++--------+----------------------------------+------------+------------+
+|    100 |  Marketing Representative        |      25000 |      35000 |
+|    101 |  Public Relations Representative |      20000 |      30000 |
+|    102 | Human Resources Representative   |      45000 |      65000 |
+|    103 | Sales Representative             |      98000 |      76000 |
+|    104 | Administration Vice President    |      67000 |      98000 |
+|    105 | programmer                       |      25000 |      35000 |
++--------+----------------------------------+------------+------------+
+6 rows in set (0.00 sec)
+Query to update min_salary:
+mysql> update jobs set  min_salary = '8000' WHERE job_id = 105 ;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query to update max_salary;
+mysql> update jobs set max_salary='40000' where job_id=105;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+ after query 
+mysql> select * from jobs;
++--------+----------------------------------+------------+------------+
+| job_id | job_title                        | min_salary | max_salary |
++--------+----------------------------------+------------+------------+
+|    100 |  Marketing Representative        |      25000 |      35000 |
+|    101 |  Public Relations Representative |      20000 |      30000 |
+|    102 | Human Resources Representative   |      45000 |      65000 |
+|    103 | Sales Representative             |      98000 |      76000 |
+|    104 | Administration Vice President    |      67000 |      98000 |
+|    105 | programmer                       |       8000 |      40000 |
++--------+----------------------------------+------------+------------+
+6 rows in set (0.00 sec)
