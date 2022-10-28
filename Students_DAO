@@ -1,0 +1,88 @@
+3.StudentDao
+
+    insertStudent(Student st);
+    Student getStudent(int id);
+    boolean deleteStudent(int id);
+    boolean updateStudent(int id);
+    import javax.transaction.Transaction;
+
+import org.hibernate.Session;
+
+public class StudentsDAO {
+
+	public static boolean insertStudents(Students s) {
+
+
+		try {
+			Session session=HibernateUtil.getSession();
+			Transaction t=(Transaction) session.beginTransaction();
+			session.save(s);
+			t.commit();
+			return true;
+
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+
+
+	}
+
+
+public static boolean getStudents(Students s) {
+
+
+		try {
+			Session session=HibernateUtil.getSession();
+			Transaction t=(Transaction) session.beginTransaction();
+			session.save(s);
+			t.commit();
+			return true;
+
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+
+
+	}
+
+public static boolean deleteStudents(Students s) {
+
+
+	try {
+		Session session=HibernateUtil.getSession();
+		Transaction t=(Transaction) session.beginTransaction();
+		session.save(s);
+		t.commit();
+		return true;
+
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+	return false;
+
+}
+public static boolean updateStudents(Students s) {
+
+
+	try {
+		Session session=HibernateUtil.getSession();
+		Transaction t=(Transaction) session.beginTransaction();
+		session.save(s);
+		t.commit();
+		return true;
+
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+	return false;
+
+
+}
+
+}
