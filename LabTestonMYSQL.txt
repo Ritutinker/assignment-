@@ -1,0 +1,154 @@
+1.Create Table
+
+a.Write a SQL statement to create a table named jobs including columns job_id,
+ job_title, min_salary, max_salary and check whether the max_salary amount exceeding the upper limit 25000.
+
+a->mysql> create table jobs (job_id int(3),job_title varchar(30),min_salary int(6),max_salary int(6) check(max_salary<25000));
+Query OK, 0 rows affected, 3 warnings (0.03 sec) 
+mysql> desc jobs;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| job_id     | int         | NO   | PRI | NULL    |       |
+| job_title  | varchar(30) | YES  |     | NULL    |       |
+| min_salary | int         | YES  |     | NULL    |       |
+| max_salary | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+
+b. Write a SQL statement to create a table named countries including columns country_id, 
+country_name and region_id and make sure that no countries except Italy, India and China 
+will be entered in the table.
+
+b->mysql> create table countries (country_id int(3),country_name enum('Italy','India','China'),region_id int(3));
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
+
+
+c.Write a SQL statement to create a table job_history including columns employee_id, start_date, end_date,
+ job_id and department_id and make sure that, the employee_id column does not contain any duplicate value 
+at the time of insertion  .
+
+c->mysql> create table job_history (employee_id int(3) primary key,start_date date,end_date date,job_id int(3),department_id int(3));
+Query OK, 0 rows affected, 3 warnings (0.02 sec)
+mysql> desc job_history;
++---------------+------+------+-----+---------+-------+
+| Field         | Type | Null | Key | Default | Extra |
++---------------+------+------+-----+---------+-------+
+| employee_id   | int  | NO   | PRI | NULL    |       |
+| start_date    | date | YES  |     | NULL    |       |
+| end_date      | date | YES  |     | NULL    |       |
+| job_id        | int  | YES  |     | NULL    |       |
+| department_id | int  | YES  |     | NULL    |       |
++---------------+------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+
+
+2.Alter Table
+
+a.Write a SQL statement to add a foreign key constraint named fk_job_id on job_id column of 
+job_history table referencing to the primary key job_id of jobs table.
+
+a->mysql> alter table job_history add constraint fk_job_id foreign key(job_id) references jobs(job_id);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> desc job_history;
++---------------+------+------+-----+---------+-------+
+| Field         | Type | Null | Key | Default | Extra |
++---------------+------+------+-----+---------+-------+
+| employee_id   | int  | NO   | PRI | NULL    |       |
+| start_date    | date | YES  |     | NULL    |       |
+| end_date      | date | YES  |     | NULL    |       |
+| job_id        | int  | YES  | MUL | NULL    |       |
+| department_id | int  | YES  |     | NULL    |       |
++---------------+------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+b.Write a SQL statement to rename the table countries to country_new.
+
+b->mysql> alter table countries rename to country_new;
+Query OK, 0 rows affected (0.01 sec)
+mysql> desc country_new;
++--------------+-------------------------------+------+-----+---------+-------+
+| Field        | Type                          | Null | Key | Default | Extra |
++--------------+-------------------------------+------+-----+---------+-------+
+| country_id   | int                           | YES  |     | NULL    |       |
+| country_name | enum('Italy','India','China') | YES  |     | NULL    |       |
+| region_id    | int                           | YES  |     | NULL    |       |
++--------------+-------------------------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+c.Write a SQL statement to change the name of the column country_id to con_id, 
+keeping the data type and size same.
+
+c->mysql> alter table country_new rename column country_id to con_id;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> desc country_new;
++--------------+-------------------------------+------+-----+---------+-------+
+| Field        | Type                          | Null | Key | Default | Extra |
++--------------+-------------------------------+------+-----+---------+-------+
+| con_id       | int                           | YES  |     | NULL    |       |
+| country_name | enum('Italy','India','China') | YES  |     | NULL    |       |
+| region_id    | int                           | YES  |     | NULL    |       |
++--------------+-------------------------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+
+
+3.DML Statement
+
+a.Write a SQL statement to insert a record with your own value into the table countries against each columns.
+
+a->mysql> insert into country_new (con_id,country_name,region_id) values(101,'India',220011);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from country_new;
++--------+--------------+-----------+
+| con_id | country_name | region_id |
++--------+--------------+-----------+
+|    101 | India        |    220011 |
++--------+--------------+-----------+
+1 row in set (0.00 sec)
+
+
+b.Write a SQL statement to insert 5 rows by a single insert statement into jobs table.
+
+b->mysql> insert into jobs(job_id,job_title,min_salary,max_Salary) values(1,'java_developer',2700,10000),(2,'python_developer',2600,8000),(3,'c#_developer',3000,7000),(4,'c++_developer',4000,12000),(5,'full_stack_developer',8000,24000);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from jobs;
++--------+----------------------+------------+------------+
+| job_id | job_title            | min_salary | max_salary |
++--------+----------------------+------------+------------+
+|      1 | java_developer       |       2700 |      10000 |
+|      2 | python_developer     |       2600 |       8000 |
+|      3 | c#_developer         |       3000 |       7000 |
+|      4 | c++_developer        |       4000 |      12000 |
+|      5 | full_stack_developer |       8000 |      24000 |
++--------+----------------------+------------+------------+
+5 rows in set (0.00 sec)
+
+
+c.Write a SQL statement to change Min_salary  to 8000 and max_Salary to 40000 for programmer.
+
+c->mysql> update jobs set min_salary=8000,max_salary=24000 where job_title='java_developer';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> select * from jobs;
++--------+----------------------+------------+------------+
+| job_id | job_title            | min_salary | max_salary |
++--------+----------------------+------------+------------+
+|      1 | java_developer       |       8000 |      24000 |
+|      2 | python_developer     |       6000 |      20000 |
+|      3 | c#_developer         |       3000 |       7000 |
+|      4 | c++_developer        |       4000 |      12000 |
+|      5 | full_stack_developer |      12000 |      24999 |
++--------+----------------------+------------+------------+
+5 rows in set (0.00 sec)
